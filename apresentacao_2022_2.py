@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler
 import joblib
 import streamlit as st
 
+
 # Função para carregar o modelo e o escalador para 2022
 def carregar_modelo_e_scaler():
     model_path = os.path.join(os.path.dirname(__file__), 'modelo.h5')
@@ -31,6 +32,7 @@ def carregar_modelo_e_scaler():
 
     return model, scaler
 
+
 # Função para preparar os dados para previsão
 def preparar_dados_para_previsao(df, caracteristicas_numericas, scaler):
     # Garantir que todas as colunas estejam presentes no DataFrame
@@ -44,15 +46,18 @@ def preparar_dados_para_previsao(df, caracteristicas_numericas, scaler):
 
     return X_num
 
+
 # Função para fazer previsões com o modelo carregado e aplicar o threshold
 def fazer_previsao_com_threshold(model, X_num, threshold):
     previsoes = model.predict(X_num)
     previsoes_binarias = (previsoes >= threshold).astype(int)
     return previsoes_binarias
 
+
 # Função para mapear o resultado da previsão para "Sim" ou "Não"
 def mapear_previsao(previsoes_binarias):
     return ["Sim" if pred == 1 else "Não" for pred in previsoes_binarias]
+
 
 # Definindo variáveis numéricas para 2022
 caracteristicas_numericas = [
