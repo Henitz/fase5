@@ -17,7 +17,7 @@ def baixar_arquivo_temporario(url):
     st.write(f"Baixando arquivo de {url}...")
     response = requests.get(url)
     if response.status_code == 200:
-        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".h5")  # Adicionando sufixo .h5
         with open(temp_file.name, 'wb') as f:
             f.write(response.content)
         st.write(f"Arquivo baixado e salvo em {temp_file.name} (Tamanho: {os.path.getsize(temp_file.name)} bytes)")
@@ -31,7 +31,7 @@ def carregar_modelo_e_scaler():
     st.write("Carregando modelo e scaler...")
 
     # URLs dos arquivos no GitHub
-    model_url = 'https://github.com/Henitz/fase5/raw/master/modelo_2022.h5'
+    model_url = 'https://github.com/Henitz/fase5/raw/master/modelo_2022.h5'  # Certifique-se que o URL tem .h5
     scaler_url = 'https://github.com/Henitz/fase5/raw/master/scaler_2022.pkl'
 
     # Baixar os arquivos do GitHub
@@ -42,21 +42,9 @@ def carregar_modelo_e_scaler():
         st.error("Erro ao baixar os arquivos. Verifique as URLs.")
         return None, None
 
-    # Verificação adicional: Checar se o arquivo é realmente um arquivo HDF5 válido
+    # Carregar o modelo
     try:
-        with open(model_path, 'rb') as f:
-            signature = f.read(8)
-            st.write(f"Assinatura do arquivo: {signature}")
-            if signature != b'\x89HDF\r\n\x1a\n':
-                st.error("Arquivo baixado não parece ser um modelo TensorFlow válido.")
-                return None, None
-    except Exception as e:
-        st.error(f"Erro ao verificar o arquivo baixado: {e}")
-        return None, None
-
-    # Carregar o modelo com recompilação forçada
-    try:
-        model = tf.keras.models.load_model(model_path, compile=True)  # Carregar com recompilação forçada
+        model = tf.keras.models.load_model(model_path)
         st.write('Modelo TensorFlow para 2022 carregado com sucesso.')
     except Exception as e:
         st.error(f'Erro ao carregar o modelo para 2022: {e}')
