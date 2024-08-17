@@ -102,10 +102,12 @@ model, scaler = carregar_modelo_e_scaler()
 if model is not None and scaler is not None:
     st.subheader("Entrada de dados")
 
-    # Criar inputs para cada característica numérica
+    # Criar inputs para cada característica numérica, aceitando vírgula como separador decimal
     inputs = {}
     for feature in caracteristicas_numericas:
-        inputs[feature] = st.number_input(f"Insira o valor para {feature}", value=0.0)
+        valor_input = st.text_input(f"Insira o valor para {feature}", value="0,0")
+        # Converter a entrada de texto para float, trocando ',' por '.'
+        inputs[feature] = float(valor_input.replace(',', '.'))
 
     # Botão para fazer a previsão
     if st.button('Obter Previsão'):
