@@ -9,8 +9,8 @@ import streamlit as st
 
 # Função para carregar o modelo e o escalador para 2022
 def carregar_modelo_e_scaler():
-    model_path = os.path.join(os.path.dirname(__file__), 'modelo.h5')
-    scaler_path = os.path.join(os.path.dirname(__file__), 'scaler.pkl')
+    model_path = os.path.join(os.path.dirname(__file__), 'modelo_2022.h5')
+    scaler_path = os.path.join(os.path.dirname(__file__), 'scaler_2022.pkl')
 
     # Carregar o modelo
     try:
