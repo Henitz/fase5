@@ -31,8 +31,8 @@ def carregar_modelo_e_scaler():
     st.write("Carregando modelo e scaler...")
 
     # URLs dos arquivos no GitHub
-    model_url = 'https://github.com/Henitz/fase5/raw/master/modelo_2022.h5'
-    scaler_url = 'https://github.com/Henitz/fase5/raw/master/scaler_2022.pkl'
+    model_url = 'https://github.com/Henitz/fase5/raw/main/modelo_2022.h5'
+    scaler_url = 'https://github.com/Henitz/fase5/raw/main/scaler_2022.pkl'
 
     # Baixar os arquivos do GitHub
     model_path = baixar_arquivo_temporario(model_url)
@@ -54,9 +54,9 @@ def carregar_modelo_e_scaler():
         st.error(f"Erro ao verificar o arquivo baixado: {e}")
         return None, None
 
-    # Carregar o modelo usando uma abordagem mais robusta
+    # Carregar o modelo com recompilação forçada
     try:
-        model = tf.keras.models.load_model(model_path, compile=False)  # Tente carregar sem compilar
+        model = tf.keras.models.load_model(model_path, compile=True)  # Carregar com recompilação forçada
         st.write('Modelo TensorFlow para 2022 carregado com sucesso.')
     except Exception as e:
         st.error(f'Erro ao carregar o modelo para 2022: {e}')
