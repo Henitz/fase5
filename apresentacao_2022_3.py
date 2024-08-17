@@ -31,8 +31,8 @@ def carregar_modelo_e_scaler():
     st.write("Carregando modelo e scaler...")
 
     # URLs dos arquivos no GitHub
-    model_url = 'https://github.com/Henitz/fase5/raw/main/modelo_2022.h5'
-    scaler_url = 'https://github.com/Henitz/fase5/raw/main/scaler_2022.pkl'
+    model_url = 'https://github.com/Henitz/fase5/raw/master/modelo_2022.h5'
+    scaler_url = 'https://github.com/Henitz/fase5/raw/master/scaler_2022.pkl'
 
     # Baixar os arquivos do GitHub
     model_path = baixar_arquivo_temporario(model_url)
