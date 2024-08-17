@@ -9,8 +9,8 @@ import streamlit as st
 
 # Função para carregar o modelo e o escalador para 2022
 def carregar_modelo_e_scaler():
-    model_path = 'https://github.com/Henitz/fase5/raw/master/modelo.h5'
-    scaler_path = 'https://github.com/Henitz/fase5/raw/master/scaler.pkl'
+    model_path = 'https://github.com/Henitz/fase5/raw/master/modelo_2022.h5'
+    scaler_path = 'https://github.com/Henitz/fase5/raw/master/scaler_2022.pkl'
 
     # Carregar o modelo
     try:
